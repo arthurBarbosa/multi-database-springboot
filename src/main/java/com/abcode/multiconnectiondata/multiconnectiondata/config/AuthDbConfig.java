@@ -1,5 +1,6 @@
 package com.abcode.multiconnectiondata.multiconnectiondata.config;
 
+import com.abcode.multiconnectiondata.multiconnectiondata.repository.auth.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -13,6 +14,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableJpaRepositories(
+        basePackageClasses = UsuarioRepository.class,
         entityManagerFactoryRef = "authEntityManager")
 public class AuthDbConfig {
 
@@ -28,7 +30,7 @@ public class AuthDbConfig {
             @Qualifier("authDataSource") DataSource dataSource) {
         return builder
                 .dataSource(dataSource)
-                .packages("com.abcode.multiconnectiondata.domain.auth")
+                .packages("com.abcode.multiconnectiondata.multiconnectiondata.domain.auth")
                 .build();
     }
 }

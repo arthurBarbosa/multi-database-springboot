@@ -1,6 +1,7 @@
 package com.abcode.multiconnectiondata.multiconnectiondata.config;
 
 
+import com.abcode.multiconnectiondata.multiconnectiondata.repository.app.LivroRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -15,6 +16,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableJpaRepositories(
+        basePackageClasses = LivroRepository.class,
         entityManagerFactoryRef = "appEntityManager")
 public class AppDbConfig {
 
@@ -31,7 +33,7 @@ public class AppDbConfig {
             EntityManagerFactoryBuilder builder,
             @Qualifier("appDataSource") DataSource dataSource) {
         return builder.dataSource(dataSource)
-                .packages("com.abcode.multiconnectiondata.domain.app")
+                .packages("com.abcode.multiconnectiondata.multiconnectiondata.domain.app")
                 .build();
     }
 
